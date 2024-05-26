@@ -1,0 +1,65 @@
+post:
+  summary: Adiciona um novo pedido
+  parameters:
+    - in: body
+      name: body
+      required: true
+      description: Dados do pedido
+      schema:
+        type: object
+        required:
+          - cpf
+          - lanche
+          - bebida
+          - acompanhamento
+          - sobremesa
+        properties:
+          cpf:
+            type: string
+            description: CPF do cliente
+          lanche:
+            type: integer
+            description: Código do lanche
+          bebida:
+            type: integer
+            description: Código da bebida
+          acompanhamento:
+            type: integer
+            description: Código do acompanhamento
+          sobremesa:
+            type: integer
+            description: Código da sobremesa
+  responses:
+    201:
+      description: Pedido criado com sucesso
+    400:
+      description: Erro na requisição
+    500:
+      description: Erro interno do servidor
+
+get:
+  summary: Lista todos os pedidos
+  responses:
+    200:
+      description: Lista de pedidos
+      schema:
+        type: array
+        items:
+          type: object
+          properties:
+            npedido:
+              type: integer
+            cpf:
+              type: string
+            lanche:
+              type: integer
+            bebida:
+              type: integer
+            acompanhamento:
+              type: integer
+            sobremesa:
+              type: integer
+            status:
+              type: string
+    500:
+      description: Erro interno do servidor

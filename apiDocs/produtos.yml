@@ -1,0 +1,96 @@
+  post:
+    summary: Cadastra um novo produto
+    parameters:
+      - in: body
+        name: body
+        required: true
+        description: Dados do produto
+        schema:
+          type: object
+          required:
+            - categoria
+            - nome
+            - preco
+          properties:
+            categoria:
+              type: string
+              enum: ['Lanche', 'Bebida', 'Acompanhamento', 'Sobremesa']
+            nome:
+              type: string
+            preco:
+              type: number
+              format: float
+            descricao:
+              type: string
+    responses:
+      201:
+        description: Produto criado com sucesso
+
+  delete:
+    summary: Remove um produto pelo código
+    parameters:
+      - name: codigo
+        in: path
+        type: integer
+        required: true
+        description: O código do produto
+    responses:
+      200:
+        description: Produto removido com sucesso
+
+  put:
+    summary: Atualiza as informações de um produto pelo código
+    parameters:
+      - name: codigo
+        in: path
+        type: integer
+        required: true
+        description: O código do produto
+      - in: body
+        name: body
+        required: true
+        description: Dados do produto
+        schema:
+          type: object
+          properties:
+            categoria:
+              type: string
+              enum: ['Lanche', 'Bebida', 'Acompanhamento', 'Sobremesa']
+            nome:
+              type: string
+            preco:
+              type: number
+              format: float
+            descricao:
+              type: string
+    responses:
+      200:
+        description: Produto atualizado com sucesso
+
+  get:
+    summary: Lista todos os produtos ou filtra por categoria
+    parameters:
+      - name: categoria
+        in: query
+        type: string
+        required: false
+        description: A categoria do produto
+    responses:
+      200:
+        description: Lista de produtos
+        schema:
+          type: array
+          items:
+            type: object
+            properties:
+              codigo:
+                type: integer
+              categoria:
+                type: string
+              nome:
+                type: string
+              preco:
+                type: number
+                format: float
+              descricao:
+                type: string
